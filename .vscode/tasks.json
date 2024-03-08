@@ -1,0 +1,71 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compilar_champion",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-c",
+                "Champion/Champion.cpp",
+                "-o",
+                "champion.o"
+            ]
+        },
+        {
+            "label": "compilar_csvhandler",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-c",
+                "CSVHandler/CSVHandler.cpp",
+                "-o",
+                "csvhandler.o"
+            ]
+        },
+        {
+            "label": "compilar_main",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-c",
+                "main.cpp",
+                "-o",
+                "main.o"
+            ]
+        },
+        {
+            "label": "vincular",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "champion.o",
+                "main.o",
+                "csvhandler.o",
+                "-o",
+                "meu_programa"
+            ]
+        },
+        {
+            "label": "executar_programa",
+            "type": "shell",
+            "command": "./meu_programa"
+        },
+        {
+            "label": "executar_todas",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "compilar_champion",
+                "compilar_main",
+                "compilar_csvhandler",
+                "vincular",
+                "executar_programa"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
