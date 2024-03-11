@@ -16,7 +16,8 @@ class CSVHandler {
     public:
         CSVHandler();
         CSVHandler(std::string fileName, FILE* mainFile);
-        vector<string> parseCSV();
+        vector<Champion>* parseCSV();
+        Champion* readChampion(string line);
         vector<string> parseCSV(int num);
         void setFileName(string fileName);
         string getFileName();
