@@ -1,5 +1,10 @@
 #include "Champion.h"
-
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <sstream>
+using namespace std;
 // Champion methods and implementations
 Champion::Champion()
 {
@@ -13,7 +18,7 @@ Champion::Champion()
     ban = 0.00;
 }
 
-Champion::Champion(std::string name, std::string classChamp, std::string role, char tier, float score, float winrate, float pick, float ban)
+Champion::Champion(string name, string classChamp, string role, char tier, float score, float winrate, float pick, float ban)
 {
     this->name = name;
     this->classChamp = classChamp;
@@ -25,27 +30,59 @@ Champion::Champion(std::string name, std::string classChamp, std::string role, c
     this->ban = ban;
 }
 
-void Champion::setName(std::string name)
+Champion::Champion(string line)
+{
+    {
+        try
+        {
+            Champion c;
+            stringstream ss(line);
+            string cell;
+            vector<string> cells;
+            while (getline(ss, cell, ','))
+            {
+                cells.push_back(cell);
+            }
+            // Considering that the input will be in this format: Name;Class;Role;Tier;Score;Trend;Win %;Role %;Pick %;Ban %;KDA
+            // Observation: Due to "Trend" & "Role %" (insignificant data), I decided to create this class considering an input with "Trend" & "Role %", the method below will do the same thing as this one, but disregarding "Trend" & "Role %"
+            this->name = cells[0];
+            this->classChamp = cells[1];
+            this->role = cells[2];
+            // Here, we notice that, if a champion is god tier, it will take the letter G
+            // c.setTier(cells[3][0]);
+            // Observation: Winrate, Pick and Ban is given by %
+            // c.setWinrate(stof(cells[5]));
+            // c.setPick(stof(cells[5]));
+            // c.setBan(stof(cells[5]));
+        }
+        catch (const exception &e)
+        {
+            cerr << "Erro: " << e.what() << endl;
+        }
+    }
+}
+
+void Champion::setName(string name)
 {
     this->name = name;
 }
-std::string Champion::getName()
+string Champion::getName()
 {
     return name;
 }
-void Champion::setClassChamp(std::string ClassChamp)
+void Champion::setClassChamp(string ClassChamp)
 {
     this->classChamp = ClassChamp;
 }
-std::string Champion::getClassChamp()
+string Champion::getClassChamp()
 {
     return classChamp;
 }
-void Champion::setRole(std::string role)
+void Champion::setRole(string role)
 {
     this->role = role;
 }
-std::string Champion::getRole()
+string Champion::getRole()
 {
     return role;
 }

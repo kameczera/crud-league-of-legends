@@ -5,12 +5,19 @@
 #include "CSVHandler/CSVHandler.h"
 using namespace std;
 
-int main(){
-    CSVHandler* a = new CSVHandler();
-    vector<Champion>* t = a->parseCSV();
-    cout << t->at(0).getName();
-
-}   
+int main()
+{
+    try
+    {
+        CSVHandler *a = new CSVHandler();
+        vector<Champion> d = *a->parseCSV();
+        cout << d.at(0).getName();
+    }
+    catch (const exception &e)
+    {
+        cerr << "Erro: " << e.what() << endl;
+    }
+}
 
 /*
 

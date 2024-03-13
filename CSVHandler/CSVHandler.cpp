@@ -32,8 +32,7 @@ vector<Champion>* CSVHandler::parseCSV()
             string line;
             while (getline(file, line))
             {
-                stringstream ss(line);
-                champions->push_back(*readChampion(line));
+                champions->push_back(Champion(line));
             }
         }
 
@@ -42,35 +41,6 @@ vector<Champion>* CSVHandler::parseCSV()
     }
     catch (const exception &e)
     {
-        cerr << "Erro: " << e.what() << endl;
-        return nullptr;
-    }
-}
-Champion* readChampion(string line)
-{
-    try{
-        Champion *c = new Champion();
-        stringstream ss(line);
-        string cell;
-        vector<string> cells;
-        while (getline(ss, cell, ','))
-        {
-            cells.push_back(cell);
-        }
-        // Considering that the input will be in this format: Name;Class;Role;Tier;Score;Trend;Win %;Role %;Pick %;Ban %;KDA
-        // Observation: Due to "Trend" & "Role %" (insignificant data), I decided to create this class considering an input with "Trend" & "Role %", the method below will do the same thing as this one, but disregarding "Trend" & "Role %"
-        c->setName(cells[0]);
-        c->setClassChamp(cells[1]);
-        c->setRole(cells[2]);
-        // Here, we notice that, if a champion is god tier, it will take the letter G
-        // c->setTier(cells[3][0]);
-        // Observation: Winrate, Pick and Ban is given by %
-        // c->setWinrate(stof(cells[5]));
-        // c->setPick(stof(cells[5]));
-        // c->setBan(stof(cells[5]));
-        return c;
-    }catch(const exception &e){
-        cerr << "Erro: " << e.what() << endl;
         return nullptr;
     }
 }
