@@ -39,7 +39,7 @@ Champion::Champion(string line)
             stringstream ss(line);
             string cell;
             vector<string> cells;
-            while (getline(ss, cell, ','))
+            while (getline(ss, cell, ';'))
             {
                 cells.push_back(cell);
             }
@@ -49,11 +49,11 @@ Champion::Champion(string line)
             this->classChamp = cells[1];
             this->role = cells[2];
             // Here, we notice that, if a champion is god tier, it will take the letter G
-            // c.setTier(cells[3][0]);
+            c.setTier(cells[3][0]);
             // Observation: Winrate, Pick and Ban is given by %
-            // c.setWinrate(stof(cells[5]));
-            // c.setPick(stof(cells[5]));
-            // c.setBan(stof(cells[5]));
+            c.setWinrate(stof(cells[5]));
+            c.setPick(stof(cells[5]));
+            c.setBan(stof(cells[5]));
         }
         catch (const exception &e)
         {

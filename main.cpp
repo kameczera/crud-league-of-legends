@@ -9,8 +9,8 @@ int main()
 {
     try
     {
-        CSVHandler *a = new CSVHandler();
-        vector<Champion> d = *a->parseCSV();
+        CSVHandler a;
+        vector<Champion> d = *a.parseCSV();
         cout << d.at(0).getName();
     }
     catch (const exception &e)

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
-const string CSV = "./dados.csv";
+// const string CSV = "../dados.csv";
 using namespace std;
 
 // Champion methods and implementations
@@ -20,20 +20,27 @@ CSVHandler::CSVHandler(string fileName, FILE *mainFile)
     this->mainFile = mainFile;
 }
 
-vector<Champion>* CSVHandler::parseCSV()
+vector<Champion> *CSVHandler::parseCSV()
 {
     try
     {
-        ifstream file(CSV);
-        vector<string> lines;
-        vector<Champion>* champions = new vector<Champion>;
+        // Error may be here
+        ifstream file("../dados.csv");
+        vector<Champion> *champions = new vector<Champion>;
         if (file.is_open())
         {
             string line;
-            while (getline(file, line))
-            {
-                champions->push_back(Champion(line));
-            }
+            getline(file, line);
+            // while (getline(file, line))
+            // {
+            cout << line;
+            // champions->push_back(Champion(line));
+            // }
+        }
+        else
+        {
+            std::cerr << "Erro ao abrir o arquivo." << std::endl;
+            return champions;
         }
 
         file.close();
