@@ -16,9 +16,10 @@ Champion::Champion()
     defense = -1;
     magic = -1;
     difficult = -1;
+    
 }
 
-Champion::Champion(string name, string title, string blurb, vector<string> tags, string partype, int attack, int defense, int magic, int difficult, int *dateRelease[3])
+Champion::Champion(string name, string title, string blurb, vector<string> tags, string partype, int attack, int defense, int magic, int difficult, Date dateRelease)
 {
     this->name = name;
     this->title = title;
@@ -60,6 +61,17 @@ string Champion::getBlurb()
 {
     return blurb;
 }
+
+void Champion::setTags(vector<string> tags)
+{
+    this->tags = tags;
+}
+
+void Champion::addTags(string tag)
+{
+    this->tags.append(tag);
+}
+
 void Champion::setPartype(string partype)
 {
     this->partype = partype;

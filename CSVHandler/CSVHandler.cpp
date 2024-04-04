@@ -20,24 +20,41 @@ CSVHandler::CSVHandler(string fileName, FILE *mainFile)
     this->mainFile = mainFile;
 }
 
-vector<Champion> *CSVHandler::parseCSV()
+vector<Champion> CSVHandler::parseCSV()
 {
-    this->fileName = "dados.csv";
+    fileName = "dados.csv";
     // Here, I prefered to use a FILE pointer just because, for some reason, ifstream was not working
-    FILE *arquivo = fopen(fileName.c_str(), "r");
-    vector<Champion> *champions = new vector<Champion>;
-    if (arquivo != nullptr)
+    mainFile = fopen(fileName.c_str(), "r");
+    vector<Champion> champions;
+    if (mainFile != nullptr)
     {
-        std::cerr << "Erro ao abrir o arquivo." << std::endl;
         char linha[100];
         // Ignoring first line because it's just the header of the csv
-        while (fgets(linha, sizeof(linha), arquivo))
+        fgets(linha, sizeof(linha), mainFile);
+        while (fgets(linha, sizeof(linha), mainFile))
         {
-            
-            std::cout << linha;
+            Champion c;
+            istringstream ss(linha);
+            string token;
+            getline(ss, token, ';');
+            c.setName(token);
+            getline(ss, token, ';');
+            c.setTitle(token);
+            getline(ss, token, ';');
+            c.setBlurb(token);
+            getline(ss, token, ';');
+            c.setTags(token);
+
+
+            getline(ss, token, ';');
+            c.setPartype(token);
         }
     }
-    fclose(arquivo);
+    else
+    {
+        cerr << "Erro ao abrir o arquivo." << endl;
+    }
+    fclose(mainFile);
     return champions;
 }
 

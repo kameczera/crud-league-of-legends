@@ -1,6 +1,7 @@
 #ifndef CHAMPION_H
 #define CHAMPION_H
 #include <string>
+#include "../Date/Date.h"
 using namespace std;
 
 // Champion declaration
@@ -17,11 +18,11 @@ private:
     int defense;
     int magic;
     int difficult;
-    int dateRelease[3];
+    Date dateRelease;
 
 public:
     Champion();
-    Champion(string name, string title, string blurb, vector<string> tags, string partype, int attack, int defense, int magic, int difficult, int dateRelease[3]);
+    Champion(string name, string title, string blurb, vector<string> tags, string partype, int attack, int defense, int magic, int difficult, Date dateRelease);
     Champion(string line);
     void setName(string nome);
     string getName();
@@ -30,6 +31,8 @@ public:
     string getTitle();
     void setBlurb(string blurb);
     string getBlurb();
+    void setTags(vector<string> tags);
+    string getTags();
     void setPartype(string partype);
     string getPartype();
     void setAttack(int attack);

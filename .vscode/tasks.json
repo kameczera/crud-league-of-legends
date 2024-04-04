@@ -24,6 +24,17 @@
             ]
         },
         {
+            "label": "compilar_date",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-c",
+                "Date/Date.cpp",
+                "-o",
+                "date.o"
+            ]
+        },
+        {
             "label": "compilar_main",
             "type": "shell",
             "command": "g++",
@@ -39,6 +50,7 @@
             "type": "shell",
             "command": "g++",
             "args": [
+                "date.o",
                 "champion.o",
                 "main.o",
                 "csvhandler.o",
@@ -55,6 +67,7 @@
             "label": "executar_todas",
             "dependsOrder": "sequence",
             "dependsOn": [
+                "compilar_date",
                 "compilar_champion",
                 "compilar_main",
                 "compilar_csvhandler",
