@@ -11,7 +11,6 @@ int main()
     {
         CSVHandler a;
         vector<Champion> d = *a.parseCSV();
-        cout << d.at(0).getName();
     }
     catch (const exception &e)
     {

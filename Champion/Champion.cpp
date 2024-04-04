@@ -8,58 +8,32 @@ using namespace std;
 // Champion methods and implementations
 Champion::Champion()
 {
-    name = "default";
-    classChamp = "default";
-    role = "default";
-    tier = 'd';
-    score = 0.00;
-    winrate = 0.00;
-    pick = 0.00;
-    ban = 0.00;
+    name = "";
+    title = "";
+    blurb = "";
+    partype = "";
+    attack = -1;
+    defense = -1;
+    magic = -1;
+    difficult = -1;
 }
 
-Champion::Champion(string name, string classChamp, string role, char tier, float score, float winrate, float pick, float ban)
+Champion::Champion(string name, string title, string blurb, vector<string> tags, string partype, int attack, int defense, int magic, int difficult, int *dateRelease[3])
 {
     this->name = name;
-    this->classChamp = classChamp;
-    this->role = role;
-    this->tier = tier;
-    this->score = score;
-    this->winrate = winrate;
-    this->pick = pick;
-    this->ban = ban;
+    this->title = title;
+    this->blurb = blurb;
+    this->partype = partype;
+    this->attack = attack;
+    this->defense = defense;
+    this->magic = magic;
+    this->difficult = difficult;
+    this->dateRelease = dateRelease;
 }
 
 Champion::Champion(string line)
 {
-    {
-        try
-        {
-            Champion c;
-            stringstream ss(line);
-            string cell;
-            vector<string> cells;
-            while (getline(ss, cell, ';'))
-            {
-                cells.push_back(cell);
-            }
-            // Considering that the input will be in this format: Name;Class;Role;Tier;Score;Trend;Win %;Role %;Pick %;Ban %;KDA
-            // Observation: Due to "Trend" & "Role %" (insignificant data), I decided to create this class considering an input with "Trend" & "Role %", the method below will do the same thing as this one, but disregarding "Trend" & "Role %"
-            this->name = cells[0];
-            this->classChamp = cells[1];
-            this->role = cells[2];
-            // Here, we notice that, if a champion is god tier, it will take the letter G
-            c.setTier(cells[3][0]);
-            // Observation: Winrate, Pick and Ban is given by %
-            c.setWinrate(stof(cells[5]));
-            c.setPick(stof(cells[5]));
-            c.setBan(stof(cells[5]));
-        }
-        catch (const exception &e)
-        {
-            cerr << "Erro: " << e.what() << endl;
-        }
-    }
+    return;
 }
 
 void Champion::setName(string name)
@@ -70,59 +44,55 @@ string Champion::getName()
 {
     return name;
 }
-void Champion::setClassChamp(string ClassChamp)
+void Champion::setTitle(string title)
 {
-    this->classChamp = ClassChamp;
+    this->title = title;
 }
-string Champion::getClassChamp()
+string Champion::getTitle()
 {
-    return classChamp;
+    return title;
 }
-void Champion::setRole(string role)
+void Champion::setBlurb(string blurb)
 {
-    this->role = role;
+    this->blurb = blurb;
 }
-string Champion::getRole()
+string Champion::getBlurb()
 {
-    return role;
+    return blurb;
 }
-void Champion::setTier(char tier)
+void Champion::setPartype(string partype)
 {
-    this->tier = tier;
+    this->partype = partype;
 }
-char Champion::getTier()
+string Champion::getPartype()
 {
-    return tier;
+    return partype;
 }
-void Champion::setScore(float Score)
+void Champion::setAttack(int attack)
 {
-    this->score = score;
+    this->attack = attack;
 }
-float Champion::getScore()
+int Champion::getAttack()
 {
-    return score;
+    return attack;
 }
-void Champion::setWinrate(float winrate)
+void Champion::setDefense(int defense)
 {
-    this->winrate = winrate;
+    this->defense = defense;
 }
-float Champion::getWinrate()
+int Champion::getDefense()
 {
-    return winrate;
+    return defense;
 }
-void Champion::setPick(float pick)
+void Champion::setMagic(int magic)
 {
-    this->pick = pick;
+    this->magic = magic;
 }
-float Champion::getPick()
+int Champion::getMagic()
 {
-    return pick;
+    return magic;
 }
-void Champion::setBan(float ban)
+void Champion::setDifficult(int difficult)
 {
-    this->ban = ban;
-}
-float Champion::getBan()
-{
-    return ban;
+    this->difficult = difficult;
 }

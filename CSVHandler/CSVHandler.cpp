@@ -22,34 +22,23 @@ CSVHandler::CSVHandler(string fileName, FILE *mainFile)
 
 vector<Champion> *CSVHandler::parseCSV()
 {
-    try
+    this->fileName = "dados.csv";
+    // Here, I prefered to use a FILE pointer just because, for some reason, ifstream was not working
+    FILE *arquivo = fopen(fileName.c_str(), "r");
+    vector<Champion> *champions = new vector<Champion>;
+    if (arquivo != nullptr)
     {
-        // Error may be here
-        ifstream file("../dados.csv");
-        vector<Champion> *champions = new vector<Champion>;
-        if (file.is_open())
+        std::cerr << "Erro ao abrir o arquivo." << std::endl;
+        char linha[100];
+        // Ignoring first line because it's just the header of the csv
+        while (fgets(linha, sizeof(linha), arquivo))
         {
-            string line;
-            getline(file, line);
-            // while (getline(file, line))
-            // {
-            cout << line;
-            // champions->push_back(Champion(line));
-            // }
+            
+            std::cout << linha;
         }
-        else
-        {
-            std::cerr << "Erro ao abrir o arquivo." << std::endl;
-            return champions;
-        }
-
-        file.close();
-        return champions;
     }
-    catch (const exception &e)
-    {
-        return nullptr;
-    }
+    fclose(arquivo);
+    return champions;
 }
 
 void CSVHandler::setFileName(string fileName)
