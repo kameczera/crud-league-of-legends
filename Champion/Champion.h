@@ -32,6 +32,7 @@ public:
     void setBlurb(string blurb);
     string getBlurb();
     void setTags(vector<string> tags);
+    void setTags(string tags);
     string getTags();
     void setPartype(string partype);
     string getPartype();

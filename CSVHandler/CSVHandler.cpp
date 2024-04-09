@@ -36,17 +36,18 @@ vector<Champion> CSVHandler::parseCSV()
             Champion c;
             istringstream ss(linha);
             string token;
-            getline(ss, token, ';');
+            getline(ss, token, ',');
             c.setName(token);
-            getline(ss, token, ';');
+            getline(ss, token, ',');
             c.setTitle(token);
-            getline(ss, token, ';');
+            
+            getline(ss, token, ',');
             c.setBlurb(token);
-            getline(ss, token, ';');
+            getline(ss, token);
             c.setTags(token);
 
 
-            getline(ss, token, ';');
+            getline(ss, token, ',');
             c.setPartype(token);
         }
     }

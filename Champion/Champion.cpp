@@ -67,9 +67,9 @@ void Champion::setTags(vector<string> tags)
     this->tags = tags;
 }
 
-void Champion::addTags(string tag)
+void Champion::setTags(string tag)
 {
-    this->tags.append(tag);
+    tags.push_back(tag);
 }
 
 void Champion::setPartype(string partype)
